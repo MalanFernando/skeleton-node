@@ -97,7 +97,7 @@ const getMyUser = (req, res)=>{
 
 const editMyUser = (req, res)=>{
     const id = req.user.id
-    
+    //perdon profe me confundi y no me salio :(
 }
 
 const deleteMyUser = (req, res) => {

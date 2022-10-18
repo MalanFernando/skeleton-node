@@ -99,7 +99,7 @@ const editMyUser = (req, res)=>{
     const id = req.user.id
     const {firstName, lastNamem, phone, birthday, gender, country}=req.body
 
-    userControllers.updateUser(id, {firstName, lastNamem, phone, birthday, gender, country})
+    usersControllers.updateUser(id, {firstName, lastNamem, phone, birthday, gender, country})
         .then(() =>{
             res.status(200).json({message: 'Your user was edited succesfully'})
         })
@@ -108,17 +108,30 @@ const editMyUser = (req, res)=>{
         })
 }
 
+// const deleteMyUser = (req, res) => {
+//     const id = req.user.id;
+    
+//     usersControllers.deleteUser(id)
+//         .then(data =>{
+//             res.status(204).json()
+//         })
+//         .catch(err =>{
+//             res.status(400).json({message: "invalid id"})
+//         })
+// };
+
 const deleteMyUser = (req, res) => {
     const id = req.user.id;
-    
-    usersControllers.deleteUser(id)
-        .then(data =>{
-            res.status(204).json()
+  
+    usersControllers.updateUser(id, { status: "inactive" })
+        .then(() => {
+          res.status(200).json({ message: `Your user was deleted succesfully!` });
         })
-        .catch(err =>{
-            res.status(400).json({message: "invalid id"})
-        })
+        .catch((err) => {
+          res.status(400).json({ message: err.message });
+        });
 };
+  
 
 module.exports = {
     getAllUsers,

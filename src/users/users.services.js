@@ -97,7 +97,15 @@ const getMyUser = (req, res)=>{
 
 const editMyUser = (req, res)=>{
     const id = req.user.id
-    //perdon profe me confundi y no me salio :(
+    const {firstName, lastNamem, phone, birthday, gender, country}=req.body
+
+    userControllers.updateUser(id, {firstName, lastNamem, phone, birthday, gender, country})
+        .then(() =>{
+            res.status(200).json({message: 'Your user was edited succesfully'})
+        })
+        .catch(err =>{
+            res.status(400).json({message: err.message})
+        })
 }
 
 const deleteMyUser = (req, res) => {
